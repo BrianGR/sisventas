@@ -22,7 +22,7 @@
 					</thead>
 					@foreach ($personas as $per)
 						<tr>
-							<td>{{ $per->idpersonas}}</td>
+							<td>{{ $per->idpersona}}</td>
 							<td>{{ $per->nombre}}</td>
 							<td>{{ $per->tipo_documento}}</td>
 							<td>{{ $per->num_documento}}</td>

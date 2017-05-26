@@ -1,6 +1,4 @@
-<?php
-
-namespace sisVentas\Http\Controllers;
+<?php namespace sisVentas\Http\Controllers;
 
 use Illuminate\Http\Request;
 
@@ -22,20 +20,25 @@ class ArticuloController extends Controller
         if ($request)
         {
             $query=trim($request->get('searchText'));
-            $articulos=DB::table('articulos as a')
+                        $searchText=($request->get('searchText'));
+
+            $articulos=DB::table('articulo as a')
                 ->join('categoria as c','a.idcategoria','=','c.idcategoria')
                 ->select('a.idarticulo','a.nombre','a.codigo','a.stock','c.nombre as categoria','a.descripcion','a.imagen','a.estado')
                 ->where ('a.nombre','LIKE','%'.$query.'%')
                 ->orwhere ('a.codigo','LIKE','%'.$query.'%')
                 ->orderBy('a.idarticulo','desc')
                 ->paginate(7);
-            return view('almacen.articulo.index',["articulos"=>$articulos,"searchText"=>$query]);
+                                            return view('almacen.articulo.index',compact('articulos','query','searchText'));
+
         }
     }
     public function create()
     {
         $categorias=DB::table('categoria')->where('condicion','=','1')->get();
-        return view("almacen.articulo.create",["categorias=>$categorias"]);
+                                                    return view('almacen.articulo.create',compact('categorias'));
+
+        //return view("almacen.articulo.create",["categorias=>$categorias"]);
     }
     public function store (ArticuloFormRequest $request)
     {
@@ -49,7 +52,7 @@ class ArticuloController extends Controller
 
         if(Input::hasFile('imagen')){
             $file=Input::file('imagen');
-            $file->move(public_path().'/imagen/articulos/',$file->getClientOriginalName());
+            $file->move(public_path().'/imagenes/articulos/',$file->getClientOriginalName());
             $articulo->imagen=$file->getClientOriginalName();
         }
 
@@ -65,7 +68,9 @@ class ArticuloController extends Controller
     {
         $articulo=Articulo::findOrFail($id);
         $categorias=DB::table('categoria')->where('condicion','=','1')->get();
-        return view("almacen.articulo.edit",["articulo"=>$articulo,"categorias"=>$categorias]);
+     //   return view("almacen.articulo.edit",["articulo"=>$articulo,"categorias"=>$categorias]);
+return view('almacen.articulo.edit',compact('articulo','categorias'));
+
     }
     public function update(ArticuloFormRequest $request,$id)
     {
@@ -79,7 +84,7 @@ class ArticuloController extends Controller
 
         if(Input::hasFile('imagen')){
             $file=Input::file('imagen');
-            $file->move(public_path().'/imagen/articulos/',$file->getClientOriginalName());
+            $file->move(public_path().'/imagenes/articulos/',$file->getClientOriginalName());
             $articulo->imagen=$file->getClientOriginalName();
         }
 

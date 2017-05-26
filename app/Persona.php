@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Persona extends Model
 {
-    protected $table='personaa';
+    protected $table='persona';
 
     protected $primaryKey='idpersona';
 
@@ -20,7 +20,9 @@ class Persona extends Model
         'num_documento',
         'direccion',
         'telefono',
-        'email'
+        'email',
+        'idproveedor'
+
     ];
 
     protected $guarded =[

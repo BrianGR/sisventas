@@ -1,27 +1,28 @@
-@extends ('layouts.admin')
-@section ('contenido')
+<?php $__env->startSection('contenido'); ?>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<h3>Nueva Articulo</h3>
-			@if (count($errors)>0)
+			<?php if(count($errors)>0): ?>
 				<div class="alert alert-danger">
 					<ul>
-						@foreach ($errors->all() as $error)
-							<li>{{$error}}</li>
-						@endforeach
+						<?php foreach($errors->all() as $error): ?>
+							<li><?php echo e($error); ?></li>
+						<?php endforeach; ?>
 					</ul>
 				</div>
-			@endif
+			<?php endif; ?>
 		</div>
 	</div>
 
-			{!!Form::open(array('url'=>'almacen/articulo','method'=>'POST','autocomplete'=>'off','files=>true'))!!}
-			{{Form::token()}}
+			<?php echo Form::open(array('url'=>'almacen/articulo','method'=>'POST','autocomplete'=>'off','files=>true')); ?>
+
+			<?php echo e(Form::token()); ?>
+
 	<div class="row">
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 			<div class="form-group">
 				<label for="nombre">Nombre</label>
-				<input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control" placeholder="Nombre...">
+				<input type="text" name="nombre" required value="<?php echo e(old('nombre')); ?>" class="form-control" placeholder="Nombre...">
 			</div>
 		</div>
 
@@ -29,9 +30,9 @@
 			<div class="form-group">
 				<label>Categoria</label>
 				<select name="idcategoria" class="form-control">
-					@foreach($categorias as $cat)
-						<option value="{{$cat->idcategoria}}">{{$cat->nombre}}</option>
-					@endforeach
+					<?php foreach($categorias as $cat): ?>
+						<option value="<?php echo e($cat->idcategoria); ?>"><?php echo e($cat->nombre); ?></option>
+					<?php endforeach; ?>
 				</select>
 			</div>
 		</div>
@@ -39,21 +40,21 @@
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 			<div class="form-group">
 				<label for="codigo">Codigo</label>
-				<input type="text" name="codigo" required value="{{old('codigo')}}" class="form-control" placeholder="Codigo del articulo...">
+				<input type="text" name="codigo" required value="<?php echo e(old('codigo')); ?>" class="form-control" placeholder="Codigo del articulo...">
 			</div>
 		</div>
 
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 			<div class="form-group">
 				<label for="stock">Stock</label>
-				<input type="text" name="stock" required value="{{old('stock')}}" class="form-control" placeholder="Stock del articulo...">
+				<input type="text" name="stock" required value="<?php echo e(old('stock')); ?>" class="form-control" placeholder="Stock del articulo...">
 			</div>
 		</div>
 
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 			<div class="form-group">
 				<label for="descripcion">Descripcion</label>
-				<input type="text" name="descripcion" value="{{old('descripcion')}}" class="form-control" placeholder="Descripcion del articulo...">
+				<input type="text" name="descripcion" value="<?php echo e(old('descripcion')); ?>" class="form-control" placeholder="Descripcion del articulo...">
 			</div>
 		</div>
 
@@ -74,7 +75,9 @@
 	</div>
 
 
-			{!!Form::close()!!}
+			<?php echo Form::close(); ?>
 
 
-@endsection
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
