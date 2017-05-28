@@ -95,7 +95,9 @@ return view('almacen.articulo.edit',compact('articulo','categorias'));
     {
         $articulo=Articulo::findOrFail($id);
         $articulo->estado='Inactivo';
-        $articulo->update();
+        //$articulo->update();
+                $articulo= DB::table('articulo')->where('idarticulo',$id)->delete();
+
         return Redirect::to('almacen/articulo');
     }
 }

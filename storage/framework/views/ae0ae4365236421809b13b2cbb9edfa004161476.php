@@ -66,7 +66,7 @@
 				<label for="imagen">Imagen</label>
 				<input type="file" name="imagen" class="form-control">
 				<?php if(($articulo->imagen)!=''): ?>
-				   <img src="<?php echo e(asset('imagenes/articulos/'.$articulos->imagen)); ?>" height="300px" width="300px">
+				   <img src="<?php echo e(asset('imagenes/articulos/'.$articulo->imagen)); ?>" height="300px" width="300px">
 				<?php endif; ?>
 			</div>
 		</div>

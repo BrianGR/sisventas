@@ -14,7 +14,7 @@
 		</div>
 	</div>
 
-			<?php echo Form::open(array('url'=>'almacen/articulo','method'=>'POST','autocomplete'=>'off','files=>true')); ?>
+			<?php echo Form::open(array('url'=>'almacen/articulo','method'=>'POST','autocomplete'=>'off','files'=>'true')); ?>
 
 			<?php echo e(Form::token()); ?>
 
