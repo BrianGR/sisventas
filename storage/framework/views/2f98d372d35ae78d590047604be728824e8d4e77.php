@@ -1,34 +1,35 @@
-@extends ('layouts.admin')
-@section ('contenido')
+<?php $__env->startSection('contenido'); ?>
 	<div class="row">
 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 			<h3>Nuevo Cliente</h3>
-			@if (count($errors)>0)
+			<?php if(count($errors)>0): ?>
 				<div class="alert alert-danger">
 					<ul>
-						@foreach ($errors->all() as $error)
-							<li>{{$error}}</li>
-						@endforeach
+						<?php foreach($errors->all() as $error): ?>
+							<li><?php echo e($error); ?></li>
+						<?php endforeach; ?>
 					</ul>
 				</div>
-			@endif
+			<?php endif; ?>
 		</div>
 	</div>
 
-			{!!Form::open(array('url'=>'ventas/cliente','method'=>'POST','autocomplete'=>'off'))!!}
-			{{Form::token()}}
+			<?php echo Form::open(array('url'=>'ventas/cliente','method'=>'POST','autocomplete'=>'off')); ?>
+
+			<?php echo e(Form::token()); ?>
+
 	<div class="row">
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 			<div class="form-group">
 				<label for="nombre">Nombre</label>
-				<input type="text" name="nombre" required value="{{old('nombre')}}" class="form-control" placeholder="Nombre...">
+				<input type="text" name="nombre" required value="<?php echo e(old('nombre')); ?>" class="form-control" placeholder="Nombre...">
 			</div>
 		</div>
 
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 			<div class="form-group">
 				<label for="direccion">Direccion</label>
-				<input type="text" name="direccion" value="{{old('direccion')}}" class="form-control" placeholder="Direccion cliente...">
+				<input type="text" name="direccion" value="<?php echo e(old('direccion')); ?>" class="form-control" placeholder="Direccion cliente...">
 			</div>
 		</div>
 
@@ -45,21 +46,21 @@
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 			<div class="form-group">
 				<label for="num_documento">Numero documento</label>
-				<input type="text" name="num_documento" value="{{old('num_documento')}}" class="form-control" placeholder="Numero documento...">
+				<input type="text" name="num_documento" value="<?php echo e(old('num_documento')); ?>" class="form-control" placeholder="Numero documento...">
 			</div>
 		</div>
 
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 			<div class="form-group">
 				<label for="telefono">Telefono</label>
-				<input type="text" name="telefono" value="{{old('telefono')}}" class="form-control" placeholder="Telefono cliente...">
+				<input type="text" name="telefono" value="<?php echo e(old('telefono')); ?>" class="form-control" placeholder="Telefono cliente...">
 			</div>
 		</div>
 
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 			<div class="form-group">
 				<label for="email">Email</label>
-				<input type="text" name="email" value="{{old('email')}}" class="form-control" placeholder="Email...">
+				<input type="text" name="email" value="<?php echo e(old('email')); ?>" class="form-control" placeholder="Email...">
 			</div>
 		</div>
 
@@ -74,7 +75,9 @@
 	</div>
 
 
-			{!!Form::close()!!}
+			<?php echo Form::close(); ?>
 
 
-@endsection
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
