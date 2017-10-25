@@ -1,18 +1,19 @@
 <?php
 
-namespace sisVentas;
+namespace sisventas;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    use Notifiable;
+protected $table='users';
+protected  $primaryKey = 'id';
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
 
     /**

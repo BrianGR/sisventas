@@ -1,6 +1,6 @@
 <?php
 
-namespace sisVentas\Providers;
+namespace sisventas\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+       $this->app->bind('patch.public', function()
+       {
+            return base_patch().'/sisventas';
+       });
     }
 }

@@ -1,29 +1,28 @@
 <?php
 
-namespace sisVentas;
+namespace sisventas;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Articulo extends Model
 {
-    protected $table='articulo';
+  protected $table = 'articulo';
 
-    protected $primaryKey='idarticulo';
+    protected $primaryKey = 'idarticulo';
 
     public $timestamps=false;
 
-
     protected $fillable =[
-        'idcategoria',
-        'codigo',
-        'nombre',
-        'stock',
-        'descripcion',
-        'imagen',
-        'estado',
+	'idcategoria',
+	'impuesto',
+	'codigo',
+	'nombre',
+	'stock',
+	'descripccion',
+	'imagen',
+	'estado'
     ];
 
-    protected $guarded =[
-
+    protected $guarded = [
     ];
 }

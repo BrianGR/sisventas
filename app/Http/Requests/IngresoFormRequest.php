@@ -1,10 +1,10 @@
 <?php
 
-namespace sisVentas\Http\Requests;
+namespace sisventas\Http\Requests;
 
-use sisVentas\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class IngresoFormRequest extends Request
+class IngresoFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,15 @@ class IngresoFormRequest extends Request
     public function rules()
     {
         return [
-            'idproveedor'=>'required',
-            'tipo_comprobante'=>'required|max:20',
-            'serie_comprobante'=>'max:7',
-            'num_comprobante'=>'required|max:10',
-            'idarticulo'=>'required',
-            'cantidad'=>'required',
-            'precio_compra'=>'required',
-            'precio_venta'=>'required'
+    'idarticulo'=>'required',
+    'cantidad'=>'required',
+    'precio_compra'=>'required',
+    'precio_venta'=>'required',
+    'idproveedor'=>'required',
+    'tipo_comprobante'=>'required|max:20',
+    'serie_comprobante' =>'required|max:12',
+    'numero_comprobante' =>'required|max:10',
+    'anticipo' =>'required'
         ];
     }
 }

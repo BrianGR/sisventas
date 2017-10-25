@@ -1,10 +1,12 @@
 <?php
 
-namespace sisVentas\Http\Requests;
+namespace sisventas\Http\Requests;
 
-use sisVentas\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
+use Articulo;
 
-class ArticuloFormRequest extends Request
+
+class ArticuloFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,12 +26,13 @@ class ArticuloFormRequest extends Request
     public function rules()
     {
         return [
-            'idcategoria'=> 'required',
-            'codigo'=>'required|max:50',
-            'nombre'=>'required|max:100',
-            'stock'=>'required|numeric',
-            'descripcion'=>'max:512',
-            //'imagen'=>'mimes:jpeg,jpg,bmp,png'
+             'idcategoria' =>'required',
+             'impuesto' =>'required',
+             'codigo' =>'required |max:50|unique:articulo',
+             'nombre'=>'required |max:60',
+             'stock'=>'required |numeric',
+             'descripccion'=>'max:500',
+             'imagen'=>'mimes:jpeg,jpg,bmp,png'
         ];
     }
 }
