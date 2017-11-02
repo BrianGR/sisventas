@@ -23,7 +23,34 @@ class PedidoController extends Controller
         //$this->middleware('auth');
     }
 
-    public function index(Request $request)
+
+/*public function index(Request $request)
+    {
+        
+            $query=trim($request->GET('searchText'));
+
+        $pedido=DB::table('pedido as pe')
+                ->join('detalledepedido as dp','pe.idpedido','=','dp.idpedido')
+                                ->join('articulo as a','a.idarticulo','=','dp.idarticulo')
+                                ->join('detallecotizacion as dc','dc.idarticulo','=','a.idarticulo')
+
+                                ->join('cotizacion as c','c.idcotizacion','=','dc.idcotizacion')
+         ->join('persona as p','c.idcliente','=','p.idpersona')
+
+
+       
+                  ->join('venta as v','v.idcliente','=','p.idpersona')
+
+            ->select('pe.idpedido','pe.fecha_hora','p.nombre','pe.num_comprobante','v.anticipo','v.total_venta')
+            ->where('pe.num_comprobante','LIKE','%'.$query.'%')
+            ->orderBy('pe.idpedido','desc')
+            ->groupBy('pe.idpedido','pe.fecha_hora','p.nombre','pe.num_comprobante')
+            ->paginate(7);
+            return view('pedidos.index',["pedido"=>$pedido,"searchText"=>$query]);
+        
+    }*/
+
+   /*public function index(Request $request)
     {
     	if($request)
     	{
@@ -31,6 +58,8 @@ class PedidoController extends Controller
 
         $pedido=DB::table('pedido as pe')
          ->join('persona as p','pe.idproveedor','=','p.idpersona')
+                  ->join('venta as v','v.idcliente','=','p.idpersona')
+
         ->join('detalledepedido as dp','pe.idpedido','=','dp.idpedido')
     		->select('pe.idpedido','pe.fecha_hora','p.nombre','pe.num_comprobante','v.anticipo','v.total_venta')
     		->where('pe.num_comprobante','LIKE','%'.$query.'%')
@@ -39,8 +68,17 @@ class PedidoController extends Controller
     		->paginate(7);
     		return view('pedidos.index',["pedido"=>$pedido,"searchText"=>$query]);
     	}
-    }
+    }*/
+ public function index(Request $request)
+    {
+        if($request)
+        {
+            $query=trim($request->GET('searchText'));
 
+        $pedido=pedido::all();
+            return view('pedidos.index',["pedido"=>$pedido,"searchText"=>$query]);
+        }
+    }
     	public function create()
     	{
             $ipedido=DB::table('pedido')->max('idpedido')+1; //as incredible
@@ -102,45 +140,45 @@ class PedidoController extends Controller
    
         }
 
-       		public function store(Pedido $request) {
+       		public function store(PedidoFormRequest $request) {
                 
-    		try{
-    			DB::beginTransaction();
+    		//try{
+    			//DB::beginTransaction();
     			$pedido=new pedido();
-    			$pedido->idcliente=$request->get('idproveedor');
+    			$pedido->idproveedor=$request->get('idproveedor');
     			$pedido->num_comprobante=$request->get('num_comprobante');
-                $pedido->total_compra=$request->get('total_venta');
-    			$mytime = Carbon::now('America/Bogota');
+                $pedido->total_venta=$request->get('total_venta');
+    			$mytime = Carbon::now('America/Santiago');
     			$pedido->fecha_hora=$mytime->toDateTimeString();
     			//$ingreso->impuesto='16';//$request->get('impuesto');//16%
-                $pedido->estado='A';
+                //$pedido->estado='A';
                 $pedido->condiciones=$request->get('condiciones');
-                //$venta->idproyecto=$request->get('idproyecto');
+                //$pedido->idproyecto=$request->get('idproyecto');
     		       $pedido->save();
     			$idarticulo=$request->get('idarticulo');
     			$cantidad=$request->get('cantidad');
     			$descuento=$request->get('descuento');
-    			$precio_venta=$request->get('precio_venta');
+    			$precio_venta=$request->get('precio_compra');
     			$cont=0;
                    
-    			While($cont < count($idarticulo))
+    			While($cont < count($cantidad))
                 {
     				$detalles=new detalledepedido();
     				$detalles->idpedido=$pedido->idpedido;
     				$detalles->idarticulo=$idarticulo[$cont];
-    				$detalles ->cantidad=$cantidad[$cont];
+    				$detalles->cantidad=$cantidad[$cont];
     				$detalles->precio_venta=$precio_venta[$cont];
     				$detalles->save();
     				$cont=$cont+1;
     			}
-    			DB::commit();
+    			/*DB::commit();
         		}
                 catch(\Exception $e)
                 {
 
 			    DB::rollback();
-                }   
-                return Redirect::to('ventas/venta');
+                }   */
+                return Redirect::to('pedidos');
     	      }
 
         public function crear_pdf($id)

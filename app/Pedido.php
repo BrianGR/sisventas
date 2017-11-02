@@ -17,6 +17,7 @@ class Pedido extends Model
 	'fecha_hora',
 	'total_venta',
 	'idproyecto',
+    'num_comprobante',
 	'condiciones',
     ];
 

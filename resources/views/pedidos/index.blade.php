@@ -27,7 +27,7 @@
 		<td>
 			<a href="{{URL::action('PedidoController@show',$ped->idpedido)}}"><button class="btn btn-primary">Detalles</button></a>
 			<a href="" data-target="#modal-delete-{{$ped->idpedido}}" data-toggle="modal"><button class="btn btn-danger">Anular</button></a>
-		   	<a href="{{URL::action('PedidoController@crear_pdf',$ped->idpedido)}}" target=newtab "><button class="btn btn-primary">Imprimir</button></a>
+		  
 		</td>
 	</tr>
 	@include('pedidos.modal')		

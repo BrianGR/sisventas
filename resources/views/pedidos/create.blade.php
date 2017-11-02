@@ -32,7 +32,7 @@
 <div class="col-lg-3 col-md-4 col-dm-12 col-xs-12">
 	<div class="form-group">
 			<label for="serie_comprobante">Serie Comprobante</label>
-			<input type="text" name="serie_comprobante" readonly value= "<?php echo date("Y-m-d");?>{{$ipedido}}" class="form-control" placeholder="Serie de comprobante...">
+			<input type="text" name="num_comprobante" readonly value= "<?php echo date("Y-m-d");?>{{$ipedido}}" class="form-control" placeholder="Serie de comprobante...">
 	</div>
 </div>
 </div>
