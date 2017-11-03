@@ -30,11 +30,9 @@
 		  
 		</td>
 	</tr>
-	@include('pedidos.modal')		
 	@endforeach
 	</table>
 	</div>
-	{{$pedido->render()}}
 	</div>	
 </div>
  {!!Form::close()!!}  
